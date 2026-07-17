@@ -1,0 +1,19 @@
+#taint a node
+k taint node cka-cluster-worker gpu=true:NoSchedule
+
+#untaint a node (guion al final)
+k taint node cka-cluster-worker2 gpu=true:NoSchedule-
+
+#agregar label a un nodo para que haga match con propiedad nodeSelector en cierto/s pods
+k label node cka-cluster-worker2 gpu=false
+
+#quitar label (guion al final)
+k label node cka-cluster-worker2 gpu-
+
+
+### Con taints and tolerations es el nodo quien "elige" quien se programa en el. Si los pods no tienen
+la toleration para la taint que tiene el nodo en su spec, no se van a programar en este nodo. 
+Tomar en cuenta que el pod tambien podria desplegarse en cualquier otro nodo (para obligar es con node affinity).
+
+Sin embargo con los selectors, es el pod quien elige en que nodo programarse. Siempre y cuando el nodo tenga dicha label
+para que haga match. Con esta label en el nodo, no significa que otros pods (sin dicha label) no pueden programarse en el nodo.  
