@@ -17,3 +17,7 @@ Tomar en cuenta que el pod tambien podria desplegarse en cualquier otro nodo (pa
 
 Sin embargo con los selectors, es el pod quien elige en que nodo programarse. Siempre y cuando el nodo tenga dicha label
 para que haga match. Con esta label en el nodo, no significa que otros pods (sin dicha label) no pueden programarse en el nodo.  
+
+
+#forma imperativa de crear un hpa
+k autoscale deployment test-dp --cpu=75% --memory=80% --min=1 --max=3
